@@ -1,4 +1,4 @@
-const User = require("../models/Users")
+const User = require("../models/Users");
 const jwt = require("jsonwebtoken");
 const {protect} = require("../middleware/autMiddleware")
 //generate the token
@@ -11,7 +11,7 @@ const generatetoken = (id)=>{
 exports.registerUser=async (req,res)=>{
     const {fullname,email,password,profileimageurl} = req.body;
 
-    if(!fullname || !email || !password || !profileimageurl){
+    if(!fullname || !email || !password){
         return res.status(400).json({message:"All fields are mandatory"});
     }
     try{
@@ -53,7 +53,7 @@ exports.loginUser = async(req,res)=>{
             token:generatetoken(user._id)
         })
     }catch(err){
-        res.status(500).json({message:"Some problem has occured"})
+        res.status(500).json({message:"No account found with this email address. Please sign up to continue."});
     }
 };
 

@@ -5,7 +5,9 @@ import { useNavigate } from "react-router-dom";
 import Inputs from "../../components/Inputs/Inputs.jsx"
 import { Link } from "react-router-dom";
 import { validateEmail } from "../../utils/helper.js";
-
+import axiosInstance from "../../utils/axiosInstance.js";
+import { API_PATHS } from "../../utils/apiPaths.js";
+import axios from "axios";
 const Login = () =>{
     const [email,setEmail] = useState("");
     const[password,setPassword] = useState("");
@@ -24,6 +26,30 @@ const Login = () =>{
             return;
         }
         setError("");
+
+        //login api call 
+        try{
+            const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN,{
+                email,
+                password,
+            });
+            const {token,user} = response.data;
+
+            if(token){
+                localStorage.setItem("token",token);
+                navigate("/dashboard");
+            }
+
+        }catch(error){
+            if(error.response && error.response.data.message){
+                setError(error.response.data.message);
+
+            }
+            else{
+                console.log(error);
+                setError("Some error has occured!!!");
+            }
+        }
 
     }
     
@@ -69,3 +95,5 @@ export default Login;
 // The setEmail function updates the email state in the Login component.
 
 // The updated email value is passed back to the Inputs component as the value prop, ensuring the input field displays the current value.
+
+
