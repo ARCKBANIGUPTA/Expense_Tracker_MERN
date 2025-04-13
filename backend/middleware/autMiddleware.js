@@ -2,7 +2,7 @@ const jwt =require("jsonwebtoken");
 const User = require("../models/Users");
 
 exports.protect = async (req,res,next)=>{
-    let token = req.headers.authorization?.split(" ")[1];
+    let token = req.headers.authorization?.split(" ")[1];//?->Safeguards against errors if authorization is missing.
     if(!token) return res.status(401).json({message:"Not authorized, no token"});
 
     try{
