@@ -1,5 +1,5 @@
 import React from "react";
-
+import UserProvider from "./context/userContext";
 import {
   BrowserRouter as Router,// It manages the navigation history using the browser’s built-in history API (like the back and forward buttons).//
   Routes,//This component is used to define all the possible routes in the application.
@@ -20,6 +20,7 @@ import Expense from "./pages/Dashboard/Expense";
 
 const App = () =>{
   return ( 
+    <UserProvider>
       <Router>
         <Routes>
           <Route path="/" element={<Root></Root>}></Route>
@@ -33,6 +34,7 @@ const App = () =>{
           {/* exact is used in earlier version of react so that route only Matches to the given path */}
         </Routes>
       </Router>
+      </UserProvider>
   )
 }
 
