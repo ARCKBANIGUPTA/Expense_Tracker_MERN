@@ -1,5 +1,4 @@
-import React from "react";
-import  { useContext } from "react";
+import React, { useContext } from "react";
 import AuthLayout from "../../components/layouts/AuthLayout";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -18,7 +17,7 @@ const Signup = () =>{
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
     const [errors,setError] = useState(null);
-    const {updateuser} = useContext(UserContext);
+    const {updateUser} = useContext(UserContext);
     const navigate = useNavigate();
 
 
@@ -63,7 +62,7 @@ const Signup = () =>{
             const {token,user} = response.data;
             if(token){
                 localStorage.setItem("token",token);
-                // updateuser(user);
+                updateUser(user);
                 navigate("/dashboard");
             }
         }catch(error){

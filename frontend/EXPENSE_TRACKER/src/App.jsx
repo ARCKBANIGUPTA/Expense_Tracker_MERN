@@ -21,6 +21,7 @@ import Expense from "./pages/Dashboard/Expense";
 const App = () =>{
   return ( 
     <UserProvider>
+      <div>
       <Router>
         <Routes>
           <Route path="/" element={<Root></Root>}></Route>
@@ -34,7 +35,8 @@ const App = () =>{
           {/* exact is used in earlier version of react so that route only Matches to the given path */}
         </Routes>
       </Router>
-      </UserProvider>
+      </div>
+    </UserProvider>
   )
 }
 

@@ -13,7 +13,7 @@ const Login = () =>{
     const[password,setPassword] = useState("");
     const[error,setError] = useState(null);
     const navigate = useNavigate();
-    const { updateuser} = useContext(UserContext);
+    const {updateUser} = useContext(UserContext);
     const handleLogin= async(e)=>{
         e.preventDefault();
 
@@ -37,7 +37,7 @@ const Login = () =>{
 
             if(token){
                 localStorage.setItem("token",token);
-                updateuser(user);
+                updateUser(user);
                 navigate("/dashboard");
             }
 
