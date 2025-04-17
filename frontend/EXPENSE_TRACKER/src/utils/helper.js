@@ -15,3 +15,15 @@ export const validateEmail=(email)=>{
 // [^\s@]+$: The top-level domain (e.g., com) must:
 // Contain at least 1 character.
 // Not include spaces or @ symbols.
+
+export const getInitials = (name) =>{
+    if (!name) return "";
+    const words = name.split(" ");
+    let initials = "";
+
+    for(let i=0; i<Math.min(words.length,2);i++){
+        initials += words[i][0]; 
+    }
+    return initials.toUpperCase();
+
+}

@@ -7,7 +7,6 @@ const UserProvider = ({children})=>{
 
     //function to update user data
     const updateUser=(userdata) =>{
-        console.log("userdata is  :",userdata);
         setUser(userdata);
     };
 
