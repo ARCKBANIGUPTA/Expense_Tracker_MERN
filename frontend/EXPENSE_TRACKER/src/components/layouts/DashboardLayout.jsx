@@ -6,15 +6,15 @@ import SideMenu from './SideMenu.jsx';
 // DashboardLayout.jsx
 const DashboardLayout = ({ children, activeMenu }) => {
     const {user} = useContext(UserContext);
-    console.log("UserConetxt:",user);
   
     return (
-      <div className="flex ">
+      <div className="flex flex-col min-h-screen">
         <Navbar activeMenu={activeMenu} />
         {user ? (
-          <div className="flex">
+          <div className="flex flex-1">
             {/* SideMenu Container */}
-            <div className="max-[1080px]:hidden">
+            <div className="max-[1080px]:hidden">  
+            {/* Permanent sidebar visible on screens wider than 1080px */}
               <SideMenu activeMenu={activeMenu} />
             </div>
   

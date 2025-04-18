@@ -3,6 +3,7 @@ import { SIDE_MENU_DATA } from "../../utils/data";
 import { UserContext } from "../../context/userContext";
 import { useNavigate } from "react-router-dom";
 import CharAvatar from "../Cards/CharAvatar";
+
 const SideMenu = ({ activeMenu }) => {
   const { user, clearUser } = useContext(UserContext);
   const navigate = useNavigate();
@@ -29,17 +30,12 @@ const SideMenu = ({ activeMenu }) => {
         sticky top-[61px] z-20
       "
     >
-      {/* 1. Title at top, left-aligned */}
-      <h2 className="text-2xl font-semibold text-gray-900 mb-8">
-        Expense Tracker
-      </h2>
-
-      {/* 2. Profile (still centered) */}
-      <div className="flex flex-col items-center mb-8">
+      {/* Profile Picture */}
+     <div className="flex flex-col items-center mb-8">
         {user?.profileimageurl ? (
           <img
             src={user.profileimageurl}
-            alt="Profile"
+            alt="Profile Picture"
             className="w-20 h-20 rounded-full bg-slate-200"
           />
         ):(
@@ -50,7 +46,7 @@ const SideMenu = ({ activeMenu }) => {
         </p>
       </div>
 
-      {/* 3. Menu buttons (full width, left-aligned) */}
+      {/*Menu buttons */}
       <nav className="flex-1 flex flex-col justify-start space-y-3">
         {SIDE_MENU_DATA.map((item, i) => (
           <button

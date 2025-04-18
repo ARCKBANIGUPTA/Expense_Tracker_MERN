@@ -13,7 +13,7 @@ app.use(
     cors({
         origin:process.env.CLIENT_URL || "*",
         //CORS stands for Cross-Origin Resource Sharing. It's a security mechanism implemented
-        // in web browsers that controls how web pages in one domain can request and interact with resources from another domain.
+        // in web browsers that controls how web pages in one domain can request and interact with resources from anot her domain.
         //stops website A to use resources of website B
         methods:["GET","POST","PUT","DELETE"],
         allowedHeaders:["Content-Type","Authorization"],
