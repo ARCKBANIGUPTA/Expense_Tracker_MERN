@@ -29,7 +29,7 @@ export const SIDE_MENU_DATA = [
     },
     {
         id:"06",
-        label:"Income",
+        label:"Logout",
         icon: LuLogOut ,
         path:"logout"
     },

@@ -27,3 +27,13 @@ export const getInitials = (name) =>{
     return initials.toUpperCase();
 
 }
+
+export const addThousandsSeparator =(num)=>{
+    if(num==null || isNaN(num)) return "";
+    const [IntegerPart,FractionalPart] = num.toString().split(".");
+    const formattedNumber = IntegerPart.replace(/\B(?=(\d{3})+(?!\d))/g,",");
+
+    return FractionalPart
+    ?`${formattedNumber}.${FractionalPart}`: formattedNumber
+
+}

@@ -52,17 +52,7 @@ const SideMenu = ({ activeMenu }) => {
           <button
             key={i}
             onClick={() => handleClick(item.path)}
-            className={`
-              flex items-center gap-4
-              w-full
-              text-sm font-medium
-              py-3 px-4 rounded-lg
-              ${
-                activeMenu === item.label
-                  ? "bg-purple-600 text-white"
-                  : "text-gray-700 hover:bg-gray-100"
-              }
-            `}
+            className={`flex items-center gap-4 w-full text-sm font-medium py-3 px-4 rounded-lg ${activeMenu === item.label ? "bg-purple-600 text-white": "text-gray-700 hover:bg-gray-100"}`}
           >
             <item.icon className="text-xl" />
             {item.label}
