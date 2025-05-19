@@ -24,7 +24,7 @@ const AuthLayout = ({children}) => {
                      icon={<LuTrendingUpDown/>}
                      label="Track your Income and expenses"
                      value="430,300"
-                     color="bg-primary"
+                     color="bg-teal-300"
                     />
                     {/* this will send props(or argument{icons,label etc..}) to the function defined below */}
                  </div>
