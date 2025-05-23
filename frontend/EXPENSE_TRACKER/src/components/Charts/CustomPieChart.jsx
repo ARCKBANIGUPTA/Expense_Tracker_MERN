@@ -7,6 +7,7 @@ import {
     ResponsiveContainer,
     Legend,
 } from "recharts";
+import CustomToolTip from './CustomToolTip';
 const CustomPieChart = ({data,label,totalAmount,colors,showTextAnchor}) => {
     return(
         <ResponsiveContainer width="100%" height={380}>
@@ -28,7 +29,7 @@ const CustomPieChart = ({data,label,totalAmount,colors,showTextAnchor}) => {
 	                //  •	Uses modulo operator (`%`) to cycle through colors if there are more data points than colors
 
                 </Pie>
-                <Tooltip /> // Shows data on hover
+                <Tooltip content={<CustomToolTip/>}/> // Shows data on hover
                 <Legend/>  // Shows legend with labels //uses dataKey and nameKey to identify the legends
                 {showTextAnchor && (
                     <>
