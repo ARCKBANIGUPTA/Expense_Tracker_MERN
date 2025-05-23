@@ -2,7 +2,7 @@ const User = require("../models/Users");
 const Expense = require("../models/Expense");
 const xlsx = require('xlsx');
 exports.addExpense = async(req,res) =>{
-    const userId = req.user.id;
+    const userID = req.user.id;
     try{
         const {icon,category,amount,date} = req.body;
         if(!category || !amount || !date){
@@ -10,14 +10,14 @@ exports.addExpense = async(req,res) =>{
         }
 
         const newExpense = new Expense({
-            userId,
+            userID,
             icon,
             category,
             amount,
             date: new Date(date)
         });
         await newExpense.save();
-        res.status(200).json({message:"New Income added succesfully"});
+        res.status(200).json({message:"New Expense added succesfully"});
     }catch(err){
         res.status(500).json({message:"Server error!"});
     }
@@ -25,10 +25,12 @@ exports.addExpense = async(req,res) =>{
 };
 
 exports.getAllExpense = async (req,res) =>{   
-    const userId = req.user.id;
-
+    const userID = req.user.id;
+    console.log(userID);
+    console.log(typeof userID);
     try{
-        const expense = await Expense.findById({userId}).sort({date:-1});
+        const expense = await Expense.find({userID: userID}).sort({date:-1});
+        console.log(expense);
         res.json(expense);
     }catch(err){
         res.status(500).json({message:"Server error!"});
@@ -45,9 +47,9 @@ exports.deleteExpense = async (req,res)=>{
 };
 
 exports.downloadExpenseExcel = async(req,res)=>{
-        const userId = req.user.id;
+        const userID = req.user.id;
         try{
-            const exExpense = await Expense.find({userId}).sort({date:-1});
+            const exExpense = await Expense.find({userID}).sort({date:-1});
     
             const data = exExpense.map((item)=>({
                 Category:item.category,

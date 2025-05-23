@@ -9,6 +9,7 @@ import { LuHandCoins,LuWalletMinimal } from "react-icons/lu";
 import {IoMdCard} from "react-icons/io";
 import { addThousandsSeparator } from "../../utils/helper";
 import RecentTransactions from "../../components/Dashboard/RecentTransactions";
+import FinanceOverview from "../../components/Dashboard/FinanceOverview";
 const Home = () =>{
     useUserAuth();
     const navigate = useNavigate();
@@ -26,19 +27,22 @@ const Home = () =>{
 
             if(response.data){
                 setDashboardData(response.data);
+                // Move console log here to see the actual data
+                console.log("Dashboard data received:", response.data);
+                console.log("Recent transactions:", response.data.recentTransactions);
             }
         }catch(error){
-            console.log("Something went wrong.PLease try again.",error);
+            console.log("Something went wrong. Please try again.",error);
         }finally{
             setLoading(false);
         }
-        
     };
 
     useEffect(()=>{
         fetchDashboardData();
         return ()=>{};
     },[]);
+
     return(
         <DashboardLayout activeMenu="Dashboard">
             <div className="my-5 mx-auto">
@@ -47,23 +51,31 @@ const Home = () =>{
                         icon={<IoMdCard/>}
                         label="Total Balance"
                         value={addThousandsSeparator(dashboardData?.totalBalance || 0)}
-                        color = "bg-indigo-900"></InfoCard>
+                        color="bg-indigo-900"
+                    />
                     <InfoCard 
                         icon={<LuWalletMinimal/>}
                         label="Total Income"
                         value={addThousandsSeparator(dashboardData?.totalIncome || 0)}
-                        color = "bg-yellow-500"></InfoCard>
-                        <InfoCard 
+                        color="bg-yellow-500"
+                    />
+                    <InfoCard 
                         icon={<LuHandCoins/>}
                         label="Total Expense"
-                        value={addThousandsSeparator(dashboardData?.totalExpense || 0)}
-                        color = "bg-emerald-400"></InfoCard>
-
+                        value={addThousandsSeparator(dashboardData?.totalExpenses || 0)}
+                        color="bg-emerald-400"
+                    />
                 </div>
+                
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                     <RecentTransactions
-                        transaction={dashboardData?.recentTransactions || 0}
-                        onSeeMore = {()=> navigate("/expense")}
+                        transaction={dashboardData?.recentTransactions || []}
+                        onSeeMore={() => navigate("/expense")}
+                    />
+                    <FinanceOverview
+                        totalBalance={dashboardData?.totalBalance || 0}
+                        totalIncome={dashboardData?.totalIncome || 0}
+                        totalExpense = {dashboardData?.totalExpenses || 0}
                     />
                 </div>
             </div>

@@ -4,33 +4,41 @@ const {isValidObjectId , Types} = require("mongoose");
 
 exports.getDashboardData = async (req,res) =>{
     try{
-        const userId = req.user.id;
-        const userObjectId = new Types.ObjectId(String(userId));
+        const userID = req.user.id;
+        const userObjectId = new Types.ObjectId(String(userID));
         
         const totalIncome = await Income.aggregate([//like SQL's GROUP BY + calculation
-            {$match:{userId:userObjectId}},//Filters documents (like SQL's WHERE clause)
-            {$group:{_id:null,total:{$sum:"amount"}}},//Groups documents by a specified _id and applies accumulator operations (like SQL's GROUP BY + SUM())
+            {$match:{userID:userObjectId}},//Filters documents (like SQL's WHERE clause)
+            {$group:{_id:null,total:{$sum:"$amount"}}},//Groups documents by a specified _id and applies accumulator operations (like SQL's GROUP BY + SUM())
             //null-> all documents
         ]);
 
-        console.log("totalIncome",{totalIncome,userId:isValidObjectId(userId)});
+        console.log("totalIncome",{totalIncome,userID:isValidObjectId(userID)});
 
         const totalExpense = await Expense.aggregate([
-            {$match:{userId:userObjectId}},
-            {$group:{_id:null,total:{$sum:"amount"}}},
+            {$match:{userID:userObjectId}},
+            {$group:{_id:null,total:{$sum:"$amount"}}},
         ]);
 
         const last60daysIncome = await Income.find({
-            userId,
+            userID : userID,
             date: {$gte: new Date(Date.now() - 60*24*60*60*1000)},
         }).sort({date:-1});
+
+        // const sixtyDaysAgo = new Date();
+        // sixtyDaysAgo.setDate(sixtyDaysAgo.getDate() - 60);
+
+        // const last60daysIncome = await Income.find({
+        //     userID: userID,
+        //     date: {$gte: sixtyDaysAgo}
+        // }).sort({date: -1});
 
         const totalIncomelast60days = last60daysIncome.reduce(
             (sum,transaction) => sum + transaction.amount,0
         );
 
         const last30daysExpense = await Expense.find({
-            userId,
+            userID,
             date: {$gte: new Date(Date.now() - 30*24*60*60*1000)},
         }).sort({date:-1});
         
@@ -39,20 +47,21 @@ exports.getDashboardData = async (req,res) =>{
         );
 
         const lastTransaction= [
-            ...(await Income.find({userId}).sort({date:-1}).limit(5)).map(
+            ...(await Income.find({userID : userID}).sort({date:-1}).limit(5)).map(
                 (txn)=>({
                     ...txn.toObject(),// Converts Mongoose doc to plain JS object.//The spread operator (...) is used to Create a New Object with Added Properties
                     type:"income", // Adds transaction type
                 })
             ),
-            ...(await Expense.find({userId}).sort({date:-1}).limit(5)).map(
+            ...(await Expense.find({userID : userID}).sort({date:-1}).limit(5)).map(
                 (txn)=>({
                     ...txn.toObject(),
                     type:"expense",
                 })
             )
         ].sort((a,b)=> b.date - a.date);
-
+        //checking
+       
         res.json({
             totalBalance:
                 (totalIncome[0]?.total || 0) - (totalExpense[0]?.total || 0),

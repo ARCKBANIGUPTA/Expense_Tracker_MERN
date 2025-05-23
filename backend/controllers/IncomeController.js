@@ -1,17 +1,18 @@
 const User = require("../models/Users");
 const Income = require("../models/Income");
 const xlsx = require('xlsx');
+const mongoose=require('mongoose')
 exports.addIncome=async(req,res)=>{
-    const userId = req.user.id;
+    const userID = req.user.id;
     try{
         
 
     const {icon,source,amount,date} = req.body;
     if(!source || !amount || !date){
-        return res.status(400),json({message:"All fields are Mandatory"});
+        return res.status(400).json({message:"All fields are Mandatory"});
     }
     const newIncome = new Income({
-        userId,
+        userID,
         icon,
         source,
         amount,
@@ -19,7 +20,7 @@ exports.addIncome=async(req,res)=>{
     });
 
     await newIncome.save();
-    res.status(200).json({message:"New Income added succesfully"});
+    res.status(200).json(newIncome);
     }catch(err){
         res.status(500).json({message:"Server error!"});
     }
@@ -27,20 +28,23 @@ exports.addIncome=async(req,res)=>{
 };
 
 exports.getAllIncome=async(req,res)=>{
-    const userId = req.user.id;
+    const userID = req.user.id;
+
     try{
-        const income = await Income.find({userId}).sort({date:-1});
+        const income = await Income.find({userID}).sort({date:-1});
+        console.log(income);
         res.json(income);
     }catch(err){
+        console.log(err);
         res.status(500).json({message:"Server Issue !"});
     }
 
 };
 
 exports.donwloadIncomeExcel=async(req,res)=>{
-    const userId = req.user.id;
+    const userID = req.user.id;
     try{
-        const exIncome = await Income.find({userId}).sort({date:-1});
+        const exIncome = await Income.find({userID}).sort({date:-1});
 
         const data = exIncome.map((item)=>({
             Source:item.source,
