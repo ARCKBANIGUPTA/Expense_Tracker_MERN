@@ -26,7 +26,7 @@ export const getInitials = (name) =>{
     }
     return initials.toUpperCase();
 
-}
+};
 
 export const addThousandsSeparator =(num)=>{
     if(num==null || isNaN(num)) return "";
@@ -36,4 +36,12 @@ export const addThousandsSeparator =(num)=>{
     return FractionalPart
     ?`${formattedNumber}.${FractionalPart}`: formattedNumber
 
-}
+};
+
+export const prepareExpenseBarChartData = (data=[]) => {
+    const chartData = data.map((item) => ({
+        category: item?.category,
+        amount: item?.amount,
+    }));
+    return chartData;
+};
