@@ -25,13 +25,7 @@ exports.getDashboardData = async (req,res) =>{
             date: {$gte: new Date(Date.now() - 60*24*60*60*1000)},
         }).sort({date:-1});
 
-        // const sixtyDaysAgo = new Date();
-        // sixtyDaysAgo.setDate(sixtyDaysAgo.getDate() - 60);
-
-        // const last60daysIncome = await Income.find({
-        //     userID: userID,
-        //     date: {$gte: sixtyDaysAgo}
-        // }).sort({date: -1});
+  
 
         const totalIncomelast60days = last60daysIncome.reduce(
             (sum,transaction) => sum + transaction.amount,0

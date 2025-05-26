@@ -43,5 +43,6 @@ export const prepareExpenseBarChartData = (data=[]) => {
         category: item?.category,
         amount: item?.amount,
     }));
+    // console.log(chartData);
     return chartData;
 };
