@@ -10,7 +10,7 @@ const {
 const router = express.Router();
 const {protect} = require("../middleware/autMiddleware");
 
-router.post("/add",protect,addIncome);
+router.post("/addIncome",protect,addIncome);
 
 router.get("/getIncome",protect,getAllIncome);
 

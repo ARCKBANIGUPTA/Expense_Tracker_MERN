@@ -8,7 +8,7 @@ import {
   createSessionStorage,//Iska use redirects ya automatic navigation ke liye hota hai.
 
 } from "react-router-dom";
-
+import {Toaster} from 'react-hot-toast';
 import Login from "./pages/Auth/Login";
 import Signup from "./pages/Auth/Signup";
 
@@ -36,6 +36,14 @@ const App = () =>{
         </Routes>
       </Router>
       </div>
+      <Toaster 
+        toastOptions={{
+          className:"",
+          style:{
+            fontSize:'13px'
+          },
+        }}
+      />
     </UserProvider>
   )
 }

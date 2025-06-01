@@ -40,5 +40,6 @@
 }
 
 .add-btn-fill{
-  @apply text-white bg-purple-50;
+  @apply text-white bg-purple-200;
 }
+
