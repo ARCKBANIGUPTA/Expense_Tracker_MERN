@@ -3,10 +3,11 @@ import Input from "../Inputs/Inputs";
 import EmojiPickerPopUp from "../layouts/EmojiPickerPopUp";
 const AddExpenseForm=({onAddExpense})=>{
     const [expense,setExpense] = useState({
-            amount:"",
+            icon:"",
             category:"",
+            amount:"",
             date:"",
-            icon:""
+            
         });
         const handleChange=(key,value)=>{
             setExpense({...expense,[key]:value});
