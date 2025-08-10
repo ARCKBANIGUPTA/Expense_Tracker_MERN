@@ -1,5 +1,5 @@
 import React from "react";
-import CARD_2 from "/Users/arckbanigupta/Documents/MAJOR_PROJECT/frontend/EXPENSE_TRACKER/src/assets/images/expense_tracker_cropped.png"
+import CARD_2 from '../../assets/images/expense_tracker_cropped.png';
 import {LuTrendingUpDown} from "react-icons/lu" // icon representing up and downs
 const AuthLayout = ({children}) => {
     return(
