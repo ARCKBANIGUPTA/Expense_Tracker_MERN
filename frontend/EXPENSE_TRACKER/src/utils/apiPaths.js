@@ -1,5 +1,5 @@
 export const BASE_URL =
-  process.env.NODE_ENV === "production"
+  process.env.NODE_ENV === import.meta.env.PROD
     ? "https://expense-tracker-zisr.onrender.com"
     : "http://localhost:8000";
 
