@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node":"24.5.0"
+  },
   "name": "expense-tracker",
   "private": true,
   "version": "0.0.0",
