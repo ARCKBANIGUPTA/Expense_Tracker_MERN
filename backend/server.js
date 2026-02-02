@@ -15,7 +15,9 @@ app.use(
         //CORS stands for Cross-Origin Resource Sharing. It's a security mechanism implemented
         // in web browsers that controls how web pages in one domain can request and interact with resources from another domain.
         //stops website A to use resources of website B
-        origin:["http://localhost:3000","https://expense-tracker-zisr.onrender.com","https://exp-track-96tz.onrender.com"],
+        // origin:["http://localhost:3000","https://expense-tracker-zisr.onrender.com","https://exp-track-96tz.onrender.com"],
+        origin:true,
+        credentials:true,
         methods:["GET","POST","PUT","DELETE"],
         allowedHeaders:["Content-Type","Authorization"],
 
