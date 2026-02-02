@@ -16,7 +16,7 @@ const Expense = () =>{
     const [OpenAddExpenseModal,setOpenAddExpenseModal]=useState(false);
     const [openDeleteAlert,setopenDeleteAlert]=useState({
         show:false,
-        data:null,
+        data:null
     });
     const fetchExpenseDetails = async () => {
         if(loading) return;
